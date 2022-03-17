@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       123
-      <Button>dianji</Button>
+      <Button type='primary'>dianji</Button>
     </div>
   )
 }
