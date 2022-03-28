@@ -4,6 +4,7 @@ import Index from '../pages/index'
 // import About from '../pages/test'
 
 const Test = lazy(() => import("../pages/test"))
+const Login = lazy(() => import("../pages/login"))
 
 const routes = [
   {
@@ -16,6 +17,15 @@ const routes = [
     element: (
       <Suspense fallback={<div>Loading...</div>}>
         <Test />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/login",
+    caseSensitive: true,
+    element: (
+      <Suspense fallback={<div>Loading...</div>}>
+        <Login />
       </Suspense>
     ),
   },
