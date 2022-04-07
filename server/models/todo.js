@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 
-const { Schema, model } = mongoose;
-
-const todolistSchema = new Schema(
+const todolistSchema = mongoose.Schema(
   {
     content: { type: String, required: true },
     time: { type: Number, default: Date.now },
@@ -26,5 +24,5 @@ const todolistSchema = new Schema(
   { timestamps: true }
 );
 
-module.exports = model("todolist", todolistSchema);
+module.exports = mongoose.model("todolist", todolistSchema);
 

@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Input, Card, Button, List, Typography, Select } from 'antd';
+import { getTodulist, addTodulist } from './request/index'
 
 const { Option } = Select;
 
@@ -13,12 +14,23 @@ function Todolist() {
   ])
   const [value, setValue] = useState<string>('')
 
+  const getData = async () => {
+    const data: any = await getTodulist()
+    console.log(data, 'datadata');
+    setTodoList(data.content)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   const handleChange = (e: { target: { value: string; }; }) => {
     setValue(e.target.value)
   }
 
   const handleSubmit = () => {
-    setTodoList([...todoList, value])
+    // setTodoList([...todoList, value])
+    addTodulist({ content: value })
     setValue('')
   }
 

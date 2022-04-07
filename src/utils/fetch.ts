@@ -1,8 +1,8 @@
-/**
+ /**
  * 将对象转成 a=1&b=2的形式
  * @param obj 对象
  */
- function obj2String(obj, arr = [], idx = 0) {
+ function obj2String(obj: any, arr: any[] = [], idx = 0) {
     for (let item in obj) {
       arr[idx++] = [item, obj[item]]
     }
@@ -18,7 +18,7 @@
   export default function request(url = '', data = {}, method = 'GET') {
     return new Promise((resolve, reject) => {
       method = method.toUpperCase()
-      let options = {
+      let options: any = {
         method: method,
         headers: {
           // 'Access-Control-Allow-Origin':'*',
@@ -36,12 +36,13 @@
           value: JSON.stringify(data)
         })
       }
-      if(import.meta.env?.MODE === "development") {
-        let baseUrl = import.meta.env?.VITE_DEV
-        url = baseUrl + url;
-      }
+      // if(import.meta.env?.MODE === "development") {
+      //   let baseUrl = import.meta.env?.VITE_DEV
+      //   url = baseUrl + url;
+      // }
       // const req = new Request(url, options)
       // fetch(req)
+      console.log(url, 'urlurl')
       fetch(url, options)
         .then((response) => {
           if(response.ok) {
@@ -52,8 +53,8 @@
               console.log(e)
             }
           } else {
-            // console.log(response)
-            return Toast.info(`${response.status} ${response.statusText}`)
+            console.log(response)
+            // return Toast.info(`${response.status} ${response.statusText}`)
           }
         })
         .then((response) => {

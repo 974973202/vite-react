@@ -42,5 +42,5 @@ app.on('error', (err, ctx) => {
 
 app.listen(port, () => {
     console.log(`seccess start server`)
-    console.log(`local: http://localhost:${port}`)
+    console.log(`local: http://127.0.0.1:${port}`)
 });
