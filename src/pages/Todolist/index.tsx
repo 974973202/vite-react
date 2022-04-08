@@ -23,6 +23,7 @@ function Todolist() {
   }
 
   const handleSubmit = () => {
+    if(!value) return message.info('请输入文本')
     // setTodoList([...todoList, value])
     addTodulist({ content: value })
     setValue('')
@@ -39,13 +40,14 @@ function Todolist() {
     <Card>
       <Input.Group compact>
         <Select defaultValue={1} style={{ width: 120 }}>
-          <Option value={1}>一</Option>
+          <Option value={1}>TODO</Option>
           <Option value={2}>二</Option>
           <Option value={3}>三</Option>
         </Select>
-        <Input value={value} onChange={handleChange} style={{ width: 'calc(100% - 195px)' }} placeholder="input to todolist" />
+        <Input showCount allowClear value={value} onChange={handleChange} style={{ width: 'calc(100% - 195px)' }} placeholder="input to todolist" />
         <Button onClick={handleSubmit} type="primary">Submit</Button>
       </Input.Group>
+
       <List
         bordered
         dataSource={todoList}
