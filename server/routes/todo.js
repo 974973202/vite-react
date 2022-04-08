@@ -4,7 +4,7 @@ const todo = new Router();
 
 todo.post('/add', add);
 todo.get('/fetch', fetchList);
-todo.del('/delete', deleteItem);
+todo.delete('/delete/:_id', deleteItem);
 // todo.put('/toggle', toggle);
 
 module.exports = todo;

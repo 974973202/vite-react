@@ -20,6 +20,13 @@ app.use(cors());
 //     const rt = ctx.response.get('X-Response-Time')
 //     console.log(`--0-1-- ${ctx.method} ${ctx.url} - ${rt}`)
 //   })
+// logger
+app.use(async (ctx, next) => {
+    const start = new Date()
+    await next()
+    const ms = new Date() - start
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+  })
 
 // middlewares
 app.use(bodyparser({
@@ -41,6 +48,5 @@ app.on('error', (err, ctx) => {
 });
 
 app.listen(port, () => {
-    console.log(`seccess start server`)
     console.log(`local: http://127.0.0.1:${port}`)
 });

@@ -9,12 +9,12 @@ async function add(ctx, next) {
   const res = await todo.create({ content });
   if(res.length!==0) {
     ctx.body = {
-      failed: false,
+      success: true,
       message: res
     }
   } else {
     ctx.body = {
-      failed: true,
+      success: false,
       message: '新增失败'
     }
   }
@@ -45,8 +45,8 @@ async function fetchList(ctx, next) {
 }
 
 async function deleteItem(ctx, next) {
-  const { _id } = ctx.request.body;
-  const res = await todo.findOneAndDelete({ _id }).exec();
+  const { _id } = ctx.params;
+  const res = await todo.findByIdAndRemove({ _id }).exec();
   if(res) {
     ctx.body = successResponse();
   } else {

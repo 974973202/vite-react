@@ -11,7 +11,7 @@
     const result = JSON.parse(JSON.stringify({content, total, current, pageSize, token}));
     return {
       message,
-      failed: false,
+      success: true,
       ...result
     }
   }
@@ -26,7 +26,7 @@
   function failedResponse({content = undefined, message = '操作失败'} = {}) {
     const result = JSON.parse(JSON.stringify({content, message}));
     return {
-      failed: true,
+      success: false,
       message,
       ...result
     }

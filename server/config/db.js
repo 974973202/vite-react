@@ -9,8 +9,9 @@ const config = require('./index')     // 引入config配置信息
 
 // mongoose连接数据库
 mongoose.connect(config.URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useNewUrlParser: true,
+    // useUnifiedTopology: true,
+    useMongoClient: true,
 })
 
 const db = mongoose.connection

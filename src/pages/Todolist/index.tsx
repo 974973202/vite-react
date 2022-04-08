@@ -1,17 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Input, Card, Button, List, Typography, Select } from 'antd';
-import { getTodulist, addTodulist } from './request/index'
+import { Input, Card, Button, List, Typography, Select, message } from 'antd';
+import { getTodulist, addTodulist, delTodulist } from './request/index'
 
 const { Option } = Select;
 
 function Todolist() {
-  const [todoList, setTodoList] = useState<string[]>([
-    'Racing car sprays burning fuel into crowd.',
-    'Japanese princess to wed commoner.',
-    'Australian walks 100km after outback crash.',
-    'Man charged over missing wedding girl.',
-    'Los Angeles battles huge wildfires.',
-  ])
+  const [todoList, setTodoList] = useState<Record<string, any>[]>([])
   const [value, setValue] = useState<string>('')
 
   const getData = async () => {
@@ -32,6 +26,12 @@ function Todolist() {
     // setTodoList([...todoList, value])
     addTodulist({ content: value })
     setValue('')
+    getData()
+  }
+
+  const handleDel = async (_id: number) => {
+    const { success, message: msg } = await delTodulist(_id);
+    success ? getData() : message.error(msg)
   }
 
 
@@ -50,8 +50,13 @@ function Todolist() {
         bordered
         dataSource={todoList}
         renderItem={item => (
-          <List.Item>
-            <Typography.Text mark>[ITEM]</Typography.Text> {item}
+          <List.Item actions={
+            [
+              <Button size="small" type="primary" ghost>修改</Button>,
+              <Button onClick={() => handleDel(item._id)} size="small" danger>删除</Button>
+            ]
+          }>
+            <Typography.Text mark>{item.createdAt}</Typography.Text> {item.content}
           </List.Item>
         )}
       />
